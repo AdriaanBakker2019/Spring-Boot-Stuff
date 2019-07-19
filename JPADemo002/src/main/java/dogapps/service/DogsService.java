@@ -14,6 +14,7 @@ public class DogsService {
     @Autowired DogsRepository repository;
 
     public void add(DogDto dto) {
+        System.out.println("adding dog" + dto.getName());
         repository.save(toEntity(dto));
     }
 

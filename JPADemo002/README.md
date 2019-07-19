@@ -19,6 +19,11 @@ http://localhost:8080/dogs/5
 -H 'Postman-Token: b4b93304-7ee7-45c2-917b-c3bc2985a250' 
 -H 'cache-control: no-cache' Get a dog by name: http://localhost:8080/dogs/name/Rikki
 
+
+Dog can now more easily be added with the form visible through http://localhost:8080/greeting 
+nb the id that is input on the form is ignored, auto generated.
+
+
 Create a new Greeting object using a form, filled in with GET http://localhost:8080/greeting
 
 show the resulting Greeting object, the form has been posted with a post request from the form http://localhost:8080/greeting contents of the object are used by the result web page (result.html) and shows this on the same url (? what exactly happens here?)
