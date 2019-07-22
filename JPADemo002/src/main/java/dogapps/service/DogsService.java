@@ -4,6 +4,7 @@ import dogapps.model.DogDto;
 import dogapps.repo.Dog;
 import dogapps.repo.DogsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class DogsService {
     }
 
     public List<Dog> getDogs() {
-        return (List<Dog>) repository.findAll();
+        return (List<Dog>) repository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
     public Dog getDogById(long id) {
