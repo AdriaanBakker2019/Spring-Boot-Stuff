@@ -24,6 +24,9 @@ public class DogsController {
         return service.getDogs();
     }
 
+
+
+
     @PostMapping
     public void postDogs(@RequestBody DogDto dto) {
         service.add(dto);
@@ -44,4 +47,6 @@ public class DogsController {
     public void delete(@PathVariable(required = true) long id) {
         service.delete(id);
     }
+
+
 }

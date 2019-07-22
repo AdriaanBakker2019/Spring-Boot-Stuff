@@ -39,4 +39,12 @@ public class DogsFrontEndController {
         model.addAttribute("counts", service.getDogs());
         return "list";
     }
+
+    @RequestMapping("/olddogs")
+    public String countsOldList(Model model) {
+        model.addAttribute("counts", service.getOldDogs());
+        return "list";
+    }
+
+
 }

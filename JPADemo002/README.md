@@ -17,13 +17,13 @@ http://localhost:8080/dogs
 -H 'Content-Type: application/json' 
 -H 'Postman-Token: c6813aea-146c-49cd-9eba-1370aad4bff9' 
 -H 'cache-control: no-cache' 
--d '{ "id": 6, "name": "Hooch", "age": 11 }' Delete a dog: curl -X DELETE 
+-d '{ "id": 6, "name": "Hooch", "age": 11 }' 
 
-Show a particular dog
-http://localhost:8080/dogs/5 
--H 'Content-Type: application/json' 
--H 'Postman-Token: b4b93304-7ee7-45c2-917b-c3bc2985a250' 
--H 'cache-control: no-cache' Get a dog by name: http://localhost:8080/dogs/name/Rikki
+Delete a dog: curl -X DELETE ...
+
+Show a particular dog: http://localhost:8080/dogs/5 
+
+Get a dog by name: http://localhost:8080/dogs/name/Rikki
 
 
 

@@ -27,6 +27,9 @@ public class DogsService {
         return (List<Dog>) repository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
+
+
+
     public Dog getDogById(long id) {
         Optional<Dog> optionalDog = repository.findById(id);
         return optionalDog.orElseThrow(() -> new DogNotFoundException("Couldn't find a Dog with id: " + id));
@@ -41,5 +44,9 @@ public class DogsService {
 
     public Dog getDogByName(String name) {
         return (Dog) repository.findDogByName(name);
+    }
+
+    public Object getOldDogs() {
+        return (List<Dog>) repository.findOldDogs();
     }
 }
