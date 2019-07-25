@@ -1,0 +1,46 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 16px;
+        }
+        h1, h2 {
+            display: inline;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+    </style>
+</head>
+<body>
+<h1>Result</h1>
+<div th:if="${not #lists.isEmpty(actorlist)}">
+    <h2>Actor:</h2><h2 th:text="${message.myValue}"> </h2>
+    <table class="table table-striped">
+        <tr th:each="count : ${actorlist}">
+            <td  th:text="${count.primaryName}"></td>
+            <td  th:text="${count.primaryProfession}"></td>
+            <td  th:text="${count.birthYear}"></td>
+        </tr>
+    </table>
+</div>
+<!-- ELSE -->
+<div th:unless="${not #lists.isEmpty(actorlist)}">
+    <h2>Actor </h2><h2 th:text="${message.myValue}"></h2><h2> was not found</h2>
+</div>
+</body>
+</html>
