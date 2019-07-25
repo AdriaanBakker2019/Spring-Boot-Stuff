@@ -15,13 +15,11 @@ public interface FilmRepository extends JpaRepository<Film, Long> {
 
 
 
-    /*@Query(value = "select nconst, primaryName primary_name, primaryProfession primary_profession, birthYear birth_year, knownForTitles known_for_titles"+
-        " from namebasics"+
-        " where primaryName = ?1 "+
-        " and birthYear is not null" +
-        " and primaryProfession like '%actor%'", nativeQuery = true)
-public List<Film> findActorsByName(String aName);*/
+    @Query(value = "select tconst, primaryTitle primary_title from titlebasics where tconst =  'tt0037792'", nativeQuery = true)
+        public Film findFilm();
 
-
+    @Query(value = "select tconst, primaryTitle primary_title from titlebasics " +
+            " where tconst in ( select tconst from titleprincipals where nconst = ?1 )", nativeQuery = true)
+    public List<Film>  findFilmsBy(String ncode);
 
 }

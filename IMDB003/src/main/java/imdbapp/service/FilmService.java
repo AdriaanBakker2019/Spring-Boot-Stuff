@@ -4,7 +4,6 @@ import imdbapp.repo.Film;
 import imdbapp.repo.FilmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -19,5 +18,12 @@ public class FilmService {
         return  repository.findAll();
     }
 
+    public Film findFilm() {
+        return  repository.findFilm();
+    }
+
+    public List<Film> findFilmsBy(String ncode) {
+        return  repository.findFilmsBy(ncode);
+    }
 
 }

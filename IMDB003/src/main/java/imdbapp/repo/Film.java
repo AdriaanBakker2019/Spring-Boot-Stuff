@@ -7,7 +7,6 @@ import javax.persistence.Id;
 public class Film {
     @Id
     String tconst;
-    String titleType;
     String primaryTitle;
 
     public String getTconst() {
@@ -18,13 +17,6 @@ public class Film {
         this.tconst = tconst;
     }
 
-    public String getTitleType() {
-        return titleType;
-    }
-
-    public void setTitleType(String titleType) {
-        this.titleType = titleType;
-    }
 
     public String getPrimaryTitle() {
         return primaryTitle;
@@ -33,23 +25,4 @@ public class Film {
     public void setPrimaryTitle(String primaryTitle) {
         this.primaryTitle = primaryTitle;
     }
-
-    public Integer getStartYear() {
-        return startYear;
-    }
-
-    public void setStartYear(Integer startYear) {
-        this.startYear = startYear;
-    }
-
-    public String getGenres() {
-        return genres;
-    }
-
-    public void setGenres(String genres) {
-        this.genres = genres;
-    }
-
-    Integer startYear;
-    String genres;
 }

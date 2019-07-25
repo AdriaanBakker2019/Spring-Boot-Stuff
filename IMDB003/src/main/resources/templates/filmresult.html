@@ -28,25 +28,25 @@
 </head>
 <body>
 <h1>Result</h1>
-<div th:if="${not #lists.isEmpty(actorlist)}">
-    <h2>Actor:</h2><h2 th:text="${message.myValue}"> </h2>
-    <div th:each="actor : ${actorlist}">
-    <table class="table table-striped">
-        <tr >
-            <td  th:text="${actor.primaryName}"></td>
-            <td  th:text="${actor.primaryProfession}"></td>
-            <td  th:text="${actor.birthYear}"></td>
-
-        </tr>
+  here come the films
+  <p th:text="${message.myValue}"></p>
 
 
-    </table>
+<div th:if="${not #lists.isEmpty(films)}">
+
+    <div >
+        <table class="table table-striped">
+            <tr th:each="film : ${films}">
+                <td  th:text="${film.tconst}"></td>
+                <td  th:text="${film.primaryTitle}"></td>
+            </tr>
+        </table>
 
     </div>
 </div>
 <!-- ELSE -->
-<div th:unless="${not #lists.isEmpty(actorlist)}">
-    <h2>Actor </h2><h2 th:text="${message.myValue}"></h2><h2> was not found</h2>
+<div th:unless="${not #lists.isEmpty(films)}">
+    <h2>films for actor with ncode  not found</h2>
 </div>
 </body>
 </html>
