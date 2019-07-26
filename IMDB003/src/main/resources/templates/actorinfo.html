@@ -29,7 +29,7 @@
 <body>
 
 <div th:if="${not #lists.isEmpty(actorlist)}">
-    <h2>Actor:</h2><h2 th:text="${message.myValue}"> </h2>
+    <h2>Actor:</h2><h2 th:text="${message.content}"> </h2>
     <div th:each="actor : ${actorlist}">
     <table class="table table-striped">
         <tr >
@@ -46,7 +46,7 @@
 
 
     Number of films : <div th:text="${ #lists.size (films)}"> </div>
-    Typecasted as: <div th:text="${typecast.myValue}"></div>
+    Typecasted as: <div th:text="${typecast.content}"></div>
 
 
 
@@ -71,7 +71,7 @@
 
 <!-- ELSE -->
 <div th:unless="${not #lists.isEmpty(actorlist)}">
-    <h2>Actor </h2><h2 th:text="${message.myValue}"></h2><h2> was not found</h2>
+    <h2>Actor </h2><h2 th:text="${message.content}"></h2><h2> was not found</h2>
 </div>
 </body>
 </html>
