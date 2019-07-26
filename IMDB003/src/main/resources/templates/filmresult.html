@@ -29,7 +29,7 @@
 <body>
 <h1>Result</h1>
   here come the films
-  <p th:text="${message.myValue}"></p>
+
 
 
 <div th:if="${not #lists.isEmpty(films)}">
@@ -39,6 +39,7 @@
             <tr th:each="film : ${films}">
                 <td  th:text="${film.tconst}"></td>
                 <td  th:text="${film.primaryTitle}"></td>
+                <td  th:text="${film.startYear}"></td>
             </tr>
         </table>
 

@@ -17,7 +17,7 @@
             text-align: left;
             padding: 16px;
         }
-        h1, h2 {
+        h1, h2, div {
             display: inline;
         }
 
@@ -27,7 +27,7 @@
     </style>
 </head>
 <body>
-<h1>Result</h1>
+
 <div th:if="${not #lists.isEmpty(actorlist)}">
     <h2>Actor:</h2><h2 th:text="${message.myValue}"> </h2>
     <div th:each="actor : ${actorlist}">
@@ -38,12 +38,37 @@
             <td  th:text="${actor.birthYear}"></td>
 
         </tr>
-
-
     </table>
-
     </div>
 </div>
+
+<div th:if="${ #lists.size (actorlist) == 1}">
+
+
+    Number of films : <div th:text="${ #lists.size (films)}"> </div>
+    Typecasted as: <div th:text="${typecast.myValue}"></div>
+
+
+
+    <div th:if="${not #lists.isEmpty(films)}">
+
+        <div >
+            <table class="table table-striped">
+                <tr th:each="film : ${films}">
+                    <td  th:text="${film.tconst}"></td>
+                    <td  th:text="${film.primaryTitle}"></td>
+                    <td  th:text="${film.startYear}"></td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+    <!-- ELSE -->
+    <div th:unless="${not #lists.isEmpty(films)}">
+        <h2>Geen films gevonden.</h2>
+    </div>
+</div>
+
 <!-- ELSE -->
 <div th:unless="${not #lists.isEmpty(actorlist)}">
     <h2>Actor </h2><h2 th:text="${message.myValue}"></h2><h2> was not found</h2>

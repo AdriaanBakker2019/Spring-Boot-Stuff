@@ -6,8 +6,26 @@ import javax.persistence.Id;
 @Entity
 public class Film {
     @Id
-    String tconst;
-    String primaryTitle;
+    private String tconst;
+    private String primaryTitle;
+    private Integer startYear;
+    private String genres;
+
+    public String getGenres() {
+        return genres;
+    }
+
+    public void setGenres(String genres) {
+        this.genres = genres;
+    }
+
+    public Integer getStartYear() {
+        return startYear;
+    }
+
+    public void setStartYear(Integer startYear) {
+        this.startYear = startYear;
+    }
 
     public String getTconst() {
         return tconst;

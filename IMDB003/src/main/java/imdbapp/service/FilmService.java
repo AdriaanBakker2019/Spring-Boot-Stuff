@@ -26,4 +26,9 @@ public class FilmService {
         return  repository.findFilmsBy(ncode);
     }
 
+    public List<Film> findTitlesInCommon(String ncode1, String ncode2) {
+        return  repository.findTitlesInCommon(ncode1, ncode2);
+    }
+
+
 }
