@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-$END$
+<h1>Retrieve coincident films of two actors</h1>
+<form action="#" th:action="@{/getcoincidence}" th:object="${twostrings}" method="post">
+    <p>Name actor 1: <input type="text" th:field="*{string1}" /></p>
+    <p>Name actor 2: <input type="text" th:field="*{string2}" /></p>
+
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
 </body>
 </html>

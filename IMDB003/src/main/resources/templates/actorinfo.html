@@ -29,10 +29,11 @@
 <body>
 
 <div th:if="${not #lists.isEmpty(actorlist)}">
-    <h2>Actor:</h2><h2 th:text="${message.content}"> </h2>
+    <h2>Actor:</h2><h2 th:text="${findactor.name}"> </h2>
     <div th:each="actor : ${actorlist}">
     <table class="table table-striped">
         <tr >
+            <td  th:text="${actor.nconst}"></td>
             <td  th:text="${actor.primaryName}"></td>
             <td  th:text="${actor.primaryProfession}"></td>
             <td  th:text="${actor.birthYear}"></td>
@@ -52,7 +53,7 @@
 
     <div th:if="${not #lists.isEmpty(films)}">
 
-        <div >
+
             <table class="table table-striped">
                 <tr th:each="film : ${films}">
                     <td  th:text="${film.tconst}"></td>
@@ -60,8 +61,6 @@
                     <td  th:text="${film.startYear}"></td>
                 </tr>
             </table>
-
-        </div>
     </div>
     <!-- ELSE -->
     <div th:unless="${not #lists.isEmpty(films)}">
@@ -71,7 +70,7 @@
 
 <!-- ELSE -->
 <div th:unless="${not #lists.isEmpty(actorlist)}">
-    <h2>Actor </h2><h2 th:text="${message.content}"></h2><h2> was not found</h2>
+    <h2>Actor </h2><h2 th:text="${findactor.name}"></h2><h2> was not found</h2>
 </div>
 </body>
 </html>

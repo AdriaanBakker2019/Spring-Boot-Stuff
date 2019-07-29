@@ -1,10 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            text-align: left;
+            width:100px;
+            min-width:100px;
+        }
+        h1, h2, div {
+            display: inline;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
+
+    </style>
 </head>
 <body>
 
+   <table class="table table-striped">
+       <tr >
+           <td  th:text="${name.content}"></td>
+           <td  th:text="${result.content}"></td>
+
+       </tr>
+   </table>
+   <div th:if="${not #lists.isEmpty(filmswithcrew)}">
+
+
+           <table class="table table-striped">
+               <div th:each="filmwithcrew: ${filmswithcrew}">
+<tr>
+    <td align="left" default="" th:text="${filmwithcrew.film.tconst}"> </td>
+           <td align="left" default="" th:text="${filmwithcrew.film.primaryTitle}"> </td>
+    <td width= "10%" align="left" default="-" th:text="${filmwithcrew.film.startYear}"> </td>
+      <td witdh = "10%" align="left" default="-"  th:text="${filmwithcrew.film.titleType}"> </td>
+           <td with="20%" align="left" default="-" th:text="${filmwithcrew.film.genres}" ></td>
+           <td with="30%" align="left" default="-" th:text="${filmwithcrew.crewstring}" ></td>
+
+</tr>       </div>
+           </table>
+
+   </div>
 </body>
 </html>

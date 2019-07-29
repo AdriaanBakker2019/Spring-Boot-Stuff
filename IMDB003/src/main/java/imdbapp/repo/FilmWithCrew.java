@@ -1,29 +1,50 @@
 package imdbapp.repo;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class FilmPage {
-    Film myFilm;
-    List<Actor> myActorList;
+public class FilmWithCrew {
+    Film film;
+    String Crewstring = "";
 
-    public FilmPage(Film myFilm, List<Actor> myActorList) {
-        this.myFilm = myFilm;
-        this.myActorList = myActorList;
+    public Film getFilm() {
+        return film;
     }
 
-    public Film getMyFilm() {
-        return myFilm;
+    public void setFilm(Film film) {
+        this.film = film;
     }
 
-    public void setMyFilm(Film myFilm) {
-        this.myFilm = myFilm;
+    List<Actor> Crew;
+
+    public FilmWithCrew(Film aFilm) {
+        film = aFilm;
+        Crew = new ArrayList<>();
     }
 
-    public List<Actor> getMyActorList() {
-        return myActorList;
+    public String getCrewstring() {
+        return Crewstring;
     }
 
-    public void setMyActorList(List<Actor> myActorList) {
-        this.myActorList = myActorList;
+    public void setCrewstring(String crewstring) {
+        Crewstring = crewstring;
+    }
+
+    public List<Actor> getCrew() {
+        return Crew;
+    }
+
+    public void setCrew(List<Actor> crew) {
+        Crew = crew;
+    }
+
+    public void addActor(Actor actor) {
+        if (Crewstring.length() == 0) {
+            Crewstring += actor.getPrimaryName();
+        } else {
+            Crewstring += "," + actor.getPrimaryName();
+        }
+
+
     }
 }

@@ -11,6 +11,17 @@ public class Film {
     private Integer startYear;
     private String genres;
 
+
+    public String getTitleType() {
+        return titleType;
+    }
+
+    public void setTitleType(String titleType) {
+        this.titleType = titleType;
+    }
+
+    private String titleType;
+
     public String getGenres() {
         return genres;
     }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+
 @Component
 public class FilmService {
     @Autowired
@@ -19,26 +20,37 @@ public class FilmService {
         return  repository.findAll();
     }
 
-    public Film findFilm(String tconst) {
-        return  repository.findFilm(tconst);
+    public Film findFilmByTconst(String tconst) {
+        return  repository.findFilmByTconst(tconst);
     }
 
-    public List<Film> findFilmsBy(String ncode) {
-        return  repository.findFilmsBy(ncode);
+    public List<Film> findFilmsByActorKey(String ncode) {
+        return  repository.findFilmsByNconst(ncode);
     }
 
-    public List<String> findTitleKeysInCommon(String ncode1, String ncode2) {
-        return  repository.findTitlesInCommon(ncode1, ncode2);
+    public List<String> findFilmKeysByActorKey(String ncode) { return repository.findFilmKeysByActorKey(ncode); }
+
+    public List<Film> findFilmsByPrimaryName(String primaryName) {
+        return repository.findFilmsByPrimaryTitle(primaryName);
     }
 
-    public List<Film> findTitlesInCommon(String ncode1, String ncode2) {
-        List <String> titlekeys = findTitleKeysInCommon(ncode1, ncode2);
-        List <Film> filmlist = new ArrayList<Film>();
+    public List<Film> findFilmsInCommon(String ncode1, String ncode2) {
+        List<String> keylist1 = findFilmKeysByActorKey(ncode1);
+        List<String> keylist2 = findFilmKeysByActorKey(ncode2);
 
-        for (String key: titlekeys) {
-            filmlist.add(findFilm(key));
+        List<Film> filmlist = new ArrayList<Film>();
+
+        for (String key: keylist1) {
+            if (keylist2.contains(key)) {
+                Film film = repository.findFilmByTconst(key);
+                filmlist.add( film );
+            }
         }
-        return filmlist;
+        return  filmlist;
+    }
+
+    public List<String> findActorKeysBy(String tconst) {
+        return repository.findActorKeysBy(tconst);
     }
 
 
