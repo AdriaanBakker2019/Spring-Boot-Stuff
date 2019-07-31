@@ -1,8 +1,11 @@
 package imdbapp.service;
 
+import imdbapp.repo.ActorRepository;
 import imdbapp.repo.Film;
 import imdbapp.repo.FilmRepository;
 import java.util.ArrayList;
+
+import imdbapp.repo.FilmWithCrew;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +17,8 @@ public class FilmService {
     @Autowired
     FilmRepository repository;
 
-
+    @Autowired
+    ActorRepository actorRepository;
 
     public List<Film> findAll() {
         return  repository.findAll();
@@ -25,7 +29,7 @@ public class FilmService {
     }
 
     public List<Film> findFilmsByActorKey(String ncode) {
-        return  repository.findFilmsByNconst(ncode);
+        return repository.findFilmsByNconst(ncode);
     }
 
     public List<String> findFilmKeysByActorKey(String ncode) { return repository.findFilmKeysByActorKey(ncode); }
@@ -49,9 +53,7 @@ public class FilmService {
         return  filmlist;
     }
 
-    public List<String> findActorKeysBy(String tconst) {
-        return repository.findActorKeysBy(tconst);
-    }
+
 
 
 }

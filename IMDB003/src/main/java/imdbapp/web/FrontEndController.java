@@ -4,6 +4,8 @@ package imdbapp.web;
 import imdbapp.repo.*;
 import imdbapp.service.ActorService;
 import imdbapp.service.FilmService;
+import imdbapp.utils.CalculateSeparation;
+import imdbapp.utils.Resultstrings;
 import imdbapp.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +19,7 @@ import java.util.List;
 @Controller
 public class FrontEndController {
     @Autowired
-    ActorService service;
+    ActorService actorService;
 
     @Autowired
     FilmService filmService;
@@ -45,11 +47,11 @@ public class FrontEndController {
         }
        if (!findactor.getHasBirthDate().equals("Yes")) {
            System.out.println("find actor with unknown birthday");
-            actors = service.findActorsByName( findactor.getName());
+            actors = actorService.findActorsByName( findactor.getName());
            System.out.println("find actor with unknown birthday found:" + actors.size());
         } else {
            System.out.println("find actor with known birthday");
-            actors = service.findActorsWithKnownBirthday( findactor.getName());
+            actors = actorService.findActorsWithKnownBirthday( findactor.getName());
            System.out.println("find actor with  birthday found:" + actors.size());
         }
 
@@ -62,7 +64,9 @@ public class FrontEndController {
             String ncode = actors.get(0).getNconst();
             Getstring svncode = new Getstring(ncode);
             films = filmService.findFilmsByActorKey(ncode);
-            model.addAttribute("films", films);
+
+            List<FilmWithCrew> fwclist = actorService.generateFWClist(films);
+            model.addAttribute("filmswithcrew", fwclist);
             model.addAttribute("ncode", svncode);
             String sTypecast = "error";
             try {
@@ -90,11 +94,16 @@ public class FrontEndController {
 
 
 
+
+
+
+
+
     /*
      *   /getcoincidence
      *
-     *   Get coincident films for two actors
-     *   Parameters: for now, one actor name. The other actor is Kevin Bacon.
+     *   Get coincident movies and tv shows for two actors
+     *   Parameters: two actor names
      */
     @GetMapping("/getcoincidence")
     public String getCoincidenceForm(Model model) {
@@ -107,9 +116,10 @@ public class FrontEndController {
     public String coincidenceSubmit(@ModelAttribute TwoStrings twostrings, Model model) {
         String name1 = twostrings.getString1();
         String name2 = twostrings.getString2();
-        List<Actor> actor1list = service.findActorsWithKnownBirthday(name1);
-        List<Actor> actor2list = service.findActorsWithKnownBirthday(name2);
+        List<Actor> actor1list = actorService.findActorsWithKnownBirthday(name1);
+        List<Actor> actor2list = actorService.findActorsWithKnownBirthday(name2);
         List <Film> filmlist = new ArrayList<Film>();
+        String result = "ok";
         if ((actor1list.size() == 1) && (actor2list.size() == 1)) {
             Actor actor1 = actor1list.get(0);
             String ncode1 = actor1.getNconst();
@@ -119,9 +129,18 @@ public class FrontEndController {
             filmlist = filmService.findFilmsInCommon(ncode1, ncode2);
 
         } else {
-            System.out.println("Actor not found or more than 1 actor");
-        }
+            if (actor1list.size()==0)
+                result = ("actor " + name1 + " not found");
+            else if (actor2list.size()==0)
+               result = ("actor " + name2 + " not found");
+            else if (actor1list.size()>1)
+                result = ("actor " + name1 + " has more than one occurrence");
+            else if (actor1list.size()>1)
+                result = ("actor " + name2 + " has more than one occurrence");
 
+        }
+        model.addAttribute("result", new Getstring(result));
+        model.addAttribute( "twostrings", twostrings);
         model.addAttribute( "films", filmlist);
         return "coincidenceinfo";
     }
@@ -130,14 +149,15 @@ public class FrontEndController {
     /*
      *   /getfilminfo
      *
-     *   Get film info and crew info for a title name
-     *   Parameters: film name
+     *   Get movie info and crew info for a title name
+     *   Parameters: movie name
      */
     @GetMapping("/getfilminfo")
     public String getFilmForm(Model model) {
         model.addAttribute("getstring", new Getstring("film name here"));
         return "getfilminfo";
     }
+
 
 
     @PostMapping("/getfilminfo")
@@ -154,22 +174,7 @@ public class FrontEndController {
             svresult.setContent("geen film gevonden");
         } else if (filmlist.size() >= 1){
             svresult.setContent( filmlist.size() + " films found");
-
-
-            for (int i = 0; i<= filmlist.size() - 1; i++) {
-                Film film = filmlist.get(i);
-                FilmWithCrew fwc = new FilmWithCrew(film);
-                System.out.println("getting actorlist for film " + film.getPrimaryTitle() + ":" + film.getStartYear());
-                List<String> keylist = service.findActorKeysByTitleKey(film.getTconst());
-                System.out.println("keylist size is " + keylist.size());
-                for (String key: keylist) {
-                    Actor actor = service.findPersonByKey(key);
-
-                    System.out.println("actor found: " + actor.getPrimaryName());
-                    fwc.addActor(actor);
-                }
-                fwclist.add(fwc);
-            }
+            fwclist = actorService.generateFWClist(filmlist);
         }
 
 
@@ -181,6 +186,45 @@ public class FrontEndController {
         return "filminfo";
     }
 
+
+
+    @GetMapping("/getseparation")
+    public String getSeparation(Model model) {
+        model.addAttribute("twostrings", new TwoStrings("actor 1 name  here", "actor 2 name here"));
+        return "getseparation";
+    }
+
+    @PostMapping("/getseparation")
+    public String getSeparationSubmit(@ModelAttribute TwoStrings twostrings, Model model) {
+        String name1 = twostrings.getString1();
+        String name2 = twostrings.getString2();
+        List<Actor> actor1list = actorService.findActorsWithKnownBirthday(name1);
+        List<Actor> actor2list = actorService.findActorsWithKnownBirthday(name2);
+        Getstring errormessage = new Getstring("ok");
+
+        Resultstrings result = new Resultstrings();
+
+        if ((actor1list.size() == 1) && (actor2list.size() == 1)) {
+            String actor1key = actor1list.get(0).getNconst();
+            String actor2key = actor2list.get(0).getNconst();
+            CalculateSeparation cs = new CalculateSeparation(actor1key, actor2key, actorService, filmService);
+            cs.checkSeparation(actor1key, actor2key, result);
+
+
+        } else {
+            if (actor1list.size()==0)
+               errormessage.setContent("actor " + name1 + " not found");
+            else if (actor2list.size()==0)
+                errormessage.setContent("actor " + name2 + " not found");
+            else if (actor1list.size()>1)
+                errormessage.setContent("actor " + name1 + " has more than one occurrence");
+            else if (actor1list.size()>1)
+                errormessage.setContent("actor " + name2 + " has more than one occurrence");
+        }
+        model.addAttribute("errormessage", errormessage);
+        model.addAttribute("result", result);
+        return "separationresult";
+    }
 
 }
 

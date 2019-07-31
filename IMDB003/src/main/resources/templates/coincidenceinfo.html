@@ -27,9 +27,11 @@
     </style>
 </head>
 <body>
-<h2>Gemeenschappelijke films</h2>
+<h2>Common titles of movies or tvshows between
+    <div th:text="${twostrings.string1}"></div>  and
+     <div th:text="${twostrings.string2}"></div></h2>
 
-
+<div th:if="${#strings.equals(result.content, 'ok')}">
     <div th:if="${not #lists.isEmpty(films)}">
 
         <div >
@@ -37,6 +39,8 @@
                 <tr th:each="film : ${films}">
                     <td  th:text="${film.tconst}"></td>
                     <td  th:text="${film.primaryTitle}"></td>
+                    <td  th:text="${film.titleType}"></td>
+                    <td  th:text="${film.genres}"></td>
                     <td  th:text="${film.startYear}"></td>
                 </tr>
             </table>
@@ -45,7 +49,15 @@
     </div>
     <!-- ELSE -->
     <div th:unless="${not #lists.isEmpty(films)}">
-        <h2>Geen gemeenschappelijke films gevonden.</h2>
+        <h2>No common titles found.</h2>
     </div>
+
+</div>
+
+<div th:unless="${#strings.equals(result.content, 'ok')}">
+       <p> <div th:text="${result.content}"></div></p>
+</div>
+
+
 </body>
 </html>

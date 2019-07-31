@@ -28,9 +28,11 @@ public interface ActorRepository extends JpaRepository<Actor, Long> {
     public Actor findPersonByNconst(String aNconst);
 
     @Query(value = "select tp.nconst from titleprincipals tp where tp.tconst = ?1 " +
-            " and category in ('actor', 'self')", nativeQuery = true)
+            " and category in ('actor', 'self', 'archive_footage')", nativeQuery = true)
     public List<String> findActorKeysByTitleKey(String aTconst);
 
 
+    @Query(value = "select nconst from titleprincipals where tconst = ?1", nativeQuery =  true)
+    public List<String> findActorKeysBy(String tcode);
 
 }

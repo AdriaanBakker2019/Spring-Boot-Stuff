@@ -46,25 +46,31 @@
 <div th:if="${ #lists.size (actorlist) == 1}">
 
 
-    Number of films : <div th:text="${ #lists.size (films)}"> </div>
+    Number of films : <div th:text="${ #lists.size (filmswithcrew)}"> </div>
     Typecasted as: <div th:text="${typecast.content}"></div>
 
 
 
-    <div th:if="${not #lists.isEmpty(films)}">
+    <div th:if="${not #lists.isEmpty(filmswithcrew)}">
 
 
-            <table class="table table-striped">
-                <tr th:each="film : ${films}">
-                    <td  th:text="${film.tconst}"></td>
-                    <td  th:text="${film.primaryTitle}"></td>
-                    <td  th:text="${film.startYear}"></td>
-                </tr>
-            </table>
+        <table class="table table-striped">
+            <div th:each="filmwithcrew: ${filmswithcrew}">
+                <tr>
+                    <td align="left" default="" th:text="${filmwithcrew.film.tconst}"> </td>
+                    <td align="left" default="" th:text="${filmwithcrew.film.primaryTitle}"> </td>
+                    <td width= "10%" align="left" default="-" th:text="${filmwithcrew.film.startYear}"> </td>
+                    <td witdh = "10%" align="left" default="-"  th:text="${filmwithcrew.film.titleType}"> </td>
+                    <td with="20%" align="left" default="-" th:text="${filmwithcrew.film.genres}" ></td>
+                    <td with="30%" align="left" default="-" th:text="${filmwithcrew.crewstring}" ></td>
+
+                </tr>       </div>
+        </table>
+
     </div>
     <!-- ELSE -->
-    <div th:unless="${not #lists.isEmpty(films)}">
-        <h2>Geen films gevonden.</h2>
+    <div th:unless="${not #lists.isEmpty(filmswithcrew)}">
+        <h2>No movie titles found</h2>
     </div>
 </div>
 
