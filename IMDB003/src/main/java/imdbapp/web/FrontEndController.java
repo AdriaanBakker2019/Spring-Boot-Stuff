@@ -205,10 +205,20 @@ public class FrontEndController {
         Resultstrings result = new Resultstrings();
 
         if ((actor1list.size() == 1) && (actor2list.size() == 1)) {
+            /*String actor1key = actor1list.get(0).getNconst();
+            String actor2key = actor2list.get(0).getNconst();
+            CalculateSeparation cs = new CalculateSeparation(actor1key, actor2key, actorService, filmService);
+            Actor actor = cs.checkSeparation(actor1key, actor2key, 1, result);
+            if (actor == null) result.add("Separation level too big, no connection found");*/
+
             String actor1key = actor1list.get(0).getNconst();
             String actor2key = actor2list.get(0).getNconst();
             CalculateSeparation cs = new CalculateSeparation(actor1key, actor2key, actorService, filmService);
-            cs.checkSeparation(actor1key, actor2key, result);
+            try {
+                int level = cs.checkLevelOfSeparation(result);
+            } catch (Exception e) {
+                result.add("ERROR checkLevelOfSeparation():" + e.getLocalizedMessage());
+            }
 
 
         } else {
