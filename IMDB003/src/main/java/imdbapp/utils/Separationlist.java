@@ -16,6 +16,12 @@ public class Separationlist {
         return actorkeylist;
     }
 
+    public String printActorkeylist() {
+        String result = "Actorkeylist: ";
+        for (String s: actorkeylist) {  result+= s+  "-";
+        }
+        return result;
+    }
 
     public Separationlist() {
 

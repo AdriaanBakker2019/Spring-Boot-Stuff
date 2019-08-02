@@ -49,8 +49,12 @@ public class ActorService {
             for (String key: keylist) {
                 Actor actor = findPersonByKey(key);
 
-                System.out.println("actor found: " + actor.getPrimaryName());
-                fwc.addActor(actor);
+                if (actor != null) { // database may not be complete
+                    System.out.println("actor found: " + actor.getPrimaryName());
+                    fwc.addActor(actor);
+                }
+
+
             }
             fwclist.add(fwc);
         }
