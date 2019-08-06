@@ -1,11 +1,9 @@
 package imdbapp.repo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class FilmWithCrew {
     Film film;
-    String Crewstring = "";
+    String crew = "";
+
 
     public Film getFilm() {
         return film;
@@ -15,34 +13,23 @@ public class FilmWithCrew {
         this.film = film;
     }
 
-    List<Actor> Crew;
+
 
     public FilmWithCrew(Film aFilm) {
         film = aFilm;
-        Crew = new ArrayList<>();
     }
 
-    public String getCrewstring() {
-        return Crewstring;
+    public String getCrew() {
+        return crew;
     }
 
-    public void setCrewstring(String crewstring) {
-        Crewstring = crewstring;
-    }
 
-    public List<Actor> getCrew() {
-        return Crew;
-    }
-
-    public void setCrew(List<Actor> crew) {
-        Crew = crew;
-    }
 
     public void addActor(Actor actor) {
-        if (Crewstring.length() == 0) {
-            Crewstring += actor.getPrimaryName();
+        if (crew.length() == 0) {
+            crew += actor.getPrimaryName();
         } else {
-            Crewstring += "," + actor.getPrimaryName();
+            crew += "," + actor.getPrimaryName();
         }
 
 

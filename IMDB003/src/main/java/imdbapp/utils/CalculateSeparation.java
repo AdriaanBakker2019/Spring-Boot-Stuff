@@ -7,7 +7,6 @@ import imdbapp.service.ActorService;
 import imdbapp.service.FilmService;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 public class CalculateSeparation {
@@ -71,14 +70,14 @@ public class CalculateSeparation {
     }
 
 
-    public ArrayList<Separationlist>  lists_1 = new ArrayList<>();
-    public ArrayList<Separationlist>  lists_2 = new ArrayList<>();
+    public ArrayList<Separationlist> lists1 = new ArrayList<>();
+    public ArrayList<Separationlist> lists2 = new ArrayList<>();
 
 
     public int checkLevelOfSeparation(Resultstrings aResultstrings) throws Exception {
         for (int i=0; i<=6; i++) {
-            lists_1.add(new Separationlist());
-            lists_2.add(new Separationlist());
+            lists1.add(new Separationlist());
+            lists2.add(new Separationlist());
         }
 
         if (actor1key.equals(actor2key)) {
@@ -86,8 +85,8 @@ public class CalculateSeparation {
             return -1;
         }
         aResultstrings.add("Degree of separation between "+ printActor(actor2key) + " and " + printActor(actor1key));
-        lists_1.get(0).addActor(actor1key, false);
-        lists_2.get(0).addActor(actor2key, false);
+        lists1.get(0).addActor(actor1key, false);
+        lists2.get(0).addActor(actor2key, false);
 
 
 
@@ -113,7 +112,7 @@ public class CalculateSeparation {
 
 
 
-        aResultstrings.add("Degree of separation is > 2");
+        aResultstrings.add("Degree of separation is > 4");
         return -1;
 
     } // checkLevelOfSeparation
@@ -141,10 +140,10 @@ public class CalculateSeparation {
         int actornr = 0;
 
         if (aFirstActor) {
-            lists = lists_1;
+            lists = lists1;
             actornr = 1;
         } else {
-            lists = lists_2;
+            lists = lists2;
             actornr = 2;
         }
         System.out.println("Extend list to " + aLevel + " for actor " + actornr);
@@ -174,11 +173,11 @@ public class CalculateSeparation {
 
 
         if (aFirstActor) {
-            lists = lists_1;
-            otherlists = lists_2;
+            lists = lists1;
+            otherlists = lists2;
         } else {
-            lists = lists_2;
-            otherlists = lists_1;
+            lists = lists2;
+            otherlists = lists1;
         }
         Separationlist list1 = lists.get(aLevel);
         Separationlist list2 = otherlists.get(aOtherlevel);

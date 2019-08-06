@@ -9,8 +9,8 @@ import java.util.*;
 public class Separationlist {
 
 
-    private HashSet<String> actorkeylist;
-    private HashMap<String, FilmActor> filmactorlist;
+    private HashSet<String> actorkeylist = new HashSet<>();
+    private HashMap<String, FilmActor> filmactorlist = new HashMap<>();
 
     public HashSet<String> getActorkeylist() {
         return actorkeylist;
@@ -21,12 +21,6 @@ public class Separationlist {
         for (String s: actorkeylist) {  result+= s+  "-";
         }
         return result;
-    }
-
-    public Separationlist() {
-
-        actorkeylist = new HashSet<>();
-        filmactorlist = new HashMap<>();
     }
 
 
