@@ -1,0 +1,48 @@
+Software Developer - Lunatech Labs Adriaan Bakker
+
+Opvolgen.
+
+U hebt geantwoord op Di 21-5-2019 09:57
+Maaike Burgeat <maaike.burgeat@lunatech.nl>
+Do 16-5-2019 11:38
+Dear Adriaan
+
+
+We’d like to invite you to do the code assessment as discussed during your interview, please read this mail carefully. During this review the reviewers will ask you to show the application running, explain your code and ask questions about why you took the approach you did, how you would change the program if certain requirements changed along with some technical questions.
+
+The code assessment is not a puzzle; it's not a hard or tricky assignment. If you have any questions do not hesitate to contact us, we'll be glad to answer them.
+
+We would like to receive your solution after approximately 1 week in a zip file.
+
+Guidelines:
+
+Approach this assessment as you were developing a real world project, we want to see how you conduct your engineering practice (project structure, code quality, readability and so on).
+The one week limit is to get rapid feedback, you can have more time, just send us an email. It’s OK if you haven’t completed all requirements, the exercise is meant to engage a discussion. Remember: Quality over Quantity.
+When you bundle the assessment in a ZIP file, exclude the target folder and the data files to make the file lighter.
+Try not to truncate the dataset, it’s possible to hold all the information in a single computer (It’s okay to use a Database).
+The tech stack chosen to implement the assessment you make sense (eg. Don’t use Spark to do respond to HTTP requests).
+This assessment is based on the popular website IMDb which offers movies and TV shows information. They have kindly made their dataset publicly available at IMDb Datasets. Your mission, should you choose to accept it, is to write a web application in Java or Scala that can fulfil the following requirements:
+
+Requirement #1 (easy):
+
+Typecasting: Given a query by the user, where he/she provides an actor/actress name, the system should determine if that person has become typecasted (at least half of their work is one genre).
+
+Requirement #2 (easy):
+
+Find the coincidence: Given a query by the user, where the input is two actors/actresses names, the application replies with a list of movies or TV shows that both people have shared.
+
+Requirement #3 (difficult):
+
+Six degrees of Kevin Bacon: Given a query by the user, you must provide what’s the degree of separation between the person (e.g. actor or actress) the user has entered and Kevin Bacon.
+
+
+
+kind regards,
+
+Maaike Burgeat
+HR & Recruitment
+
++ 31 6 28 14 50 14
+
+
+
