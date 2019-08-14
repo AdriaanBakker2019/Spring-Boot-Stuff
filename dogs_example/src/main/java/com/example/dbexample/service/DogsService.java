@@ -7,11 +7,7 @@ import com.example.dbexample.model.DogDto;
 import com.example.dbexample.repo.Dog;
 import com.example.dbexample.repo.DogsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.Optional;
 
 @Component
 public class DogsService {
@@ -27,11 +23,8 @@ public class DogsService {
     }
 
     public List<Dog> getDogs() {
-        return (List<Dog>) repository.findAll(Sort.by(Sort.Direction.ASC, "name"));
+        return (List<Dog>) repository.findAllByOrderByNameAsc();
     }
-
-
-
 
     public Dog getDogById(long id) {
         Optional<Dog> optionalDog = repository.findById(id);
@@ -45,8 +38,11 @@ public class DogsService {
         return entity;
     }
 
-    public Dog getDogByName(String name) {
-        return (Dog) repository.findDogByName(name);
+    public List<Dog> getDogsByName(String name) {
+        System.out.println("find dogs by name "+ name +"  in dogsservice");
+        List<Dog> dogs = repository.findDogsByName(name);
+        System.out.println("found :" + dogs.size());
+        return dogs;
     }
 
     public Object getOldDogs() {

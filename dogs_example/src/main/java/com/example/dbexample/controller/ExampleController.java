@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 public class ExampleController {
     @Autowired
@@ -62,9 +64,19 @@ public class ExampleController {
 
     @PostMapping("/delete_dog")
     public String deleteSubmit(Model model, @ModelAttribute IdMessage idMessage) {
-        Dog dog = dogsService.getDogByName(idMessage.getContent());
-        dogsService.delete(dog.getId());
+        String name = idMessage.getContent();
+        idMessage.setContent("ok");
+        List<Dog> doglist = dogsService.getDogsByName(name);
+        Dog dog = new Dog();
+        if ( doglist.size() ==0 ) {
+            idMessage.setContent("dog with name not found:" + name );
+        } else {
+            dog = doglist.get(0);
+            dogsService.delete(dog.getId());
+        };
+
         model.addAttribute("dog", dog);
+        model.addAttribute("message", idMessage);
         return "delete_dog_confirm";
     }
 
