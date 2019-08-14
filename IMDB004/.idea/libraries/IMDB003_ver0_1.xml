@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="IMDB003-ver0.1">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/build/libs/IMDB003-ver0.1.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
