@@ -2,6 +2,7 @@ package com.example.imdb_heroku.controller;
 
 import com.example.imdb_heroku.model.Param;
 import com.example.imdb_heroku.repo.Actor;
+import com.example.imdb_heroku.model.Request;
 import com.example.imdb_heroku.service.ActorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,22 +26,22 @@ public class ActorController {
 
     @GetMapping("/getactorinfo")
     public String getActorInfo(Model model) {
-        model.addAttribute("param", new Param());
+        model.addAttribute("request", new Request());
         return "getactorinfo";
     }
 
     @PostMapping("/getactorinfo")
-    public String getActorInfoSubmit(@ModelAttribute Param param, Model model) {
+    public String getActorInfoSubmit(@ModelAttribute Request request, Model model) {
         List<Actor> actors = new ArrayList<>();
 
 
-            System.out.println("find actor " + param.getContent());
-            actors = actorService.findByName(param.getContent());
+            System.out.println("find actor " + request.getName());
+            actors = actorService.findByName(request.getName());
             System.out.println("find actor list length:" + actors.size());
 
 
         model.addAttribute("actorlist", actors);
-        model.addAttribute("findactor", param);
+        model.addAttribute("findactor", request);
 
 
         return "showactorinfo";

@@ -30,7 +30,7 @@
 
  show actor info
  <div th:if="${not #lists.isEmpty(actorlist)}">
-     <h2>Actor:</h2><h2 th:text="${param.name}"> </h2>
+     <h2>Actor:</h2><h2 th:text="${request.name}"> </h2>
      <div th:each="actor : ${actorlist}">
          <table class="table table-striped">
              <tr >

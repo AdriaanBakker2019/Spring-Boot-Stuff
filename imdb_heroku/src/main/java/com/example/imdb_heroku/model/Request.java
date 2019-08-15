@@ -1,9 +1,9 @@
-package com.example.imdb_heroku.repo;
+package com.example.imdb_heroku.model;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class ActorRequest {
+public class Request {
     private String name;
 
     public String getName() {
